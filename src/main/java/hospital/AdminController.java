@@ -34,6 +34,33 @@ public class AdminController {
             model.addAttribute("result","Creation succesful!");
         }
 
+        model.addAttribute("users",userService.getAll());
+        return "admin";
+    }
+
+    @RequestMapping(value = "/admin", method = RequestMethod.POST, params = "Update=Update")
+    public String update(@ModelAttribute("user") UserDTO user, @RequestParam String role, Model model){
+        Notification<Boolean> notification = userService.update(user,role);
+        if(notification.hasErrors()){
+            model.addAttribute("result",notification.getFormattedErrors());
+        } else {
+            model.addAttribute("result","Update succesful!");
+        }
+
+        model.addAttribute("users",userService.getAll());
+        return "admin";
+    }
+
+    @RequestMapping(value = "/admin", method = RequestMethod.POST, params = "Delete=Delete")
+    public String delete(@ModelAttribute("user") UserDTO user, Model model){
+        Notification<Boolean> notification = userService.delete(user.getUsername());
+        if(notification.hasErrors()){
+            model.addAttribute("result",notification.getFormattedErrors());
+        } else {
+            model.addAttribute("result","Update succesful!");
+        }
+
+        model.addAttribute("users",userService.getAll());
         return "admin";
     }
 }

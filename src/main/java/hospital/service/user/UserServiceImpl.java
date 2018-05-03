@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.encoding.ShaPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
@@ -54,15 +55,17 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Transactional
     public Notification<Boolean> delete(String username) {
-        userRepository.delete(username);
         roleRepository.deleteByUsername(username);
+        userRepository.delete(username);
         Notification<Boolean> notification = new Notification<>();
         notification.setResult(Boolean.TRUE);
         return notification;
     }
 
     @Override
+    @Transactional
     public Notification<Boolean> update(UserDTO userDTO, String role) {
         User user = userRepository.findOne(userDTO.username);
         user.setPassword(userDTO.password);
