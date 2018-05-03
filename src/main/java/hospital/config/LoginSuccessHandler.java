@@ -43,25 +43,31 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler {
     }
 
     protected String determineTargetUrl(Authentication authentication) {
-        boolean isUser = false;
+        boolean isSecretary = false;
         boolean isAdmin=false;
+        boolean isDoctor = false;
         Collection<? extends GrantedAuthority> authorities
                 = authentication.getAuthorities();
         for (GrantedAuthority grantedAuthority : authorities) {
             if (grantedAuthority.getAuthority().equals("ROLE_ADMIN")) {
                 isAdmin = true;
                 break;
-            } else if (grantedAuthority.getAuthority().equals("ROLE_USER")) {
-                isUser = true;
+            } else if (grantedAuthority.getAuthority().equals("ROLE_SECRETARY")) {
+                isSecretary = true;
                 break;
+            } else if (grantedAuthority.getAuthority().equals("ROLE_DOCTOR")) {
+                isDoctor = true;
             }
         }
 
         if (isAdmin) {
             return "/admin";
-        } else if (isUser) {
-            return "/user";
-        } else {
+        } else if (isSecretary) {
+            return "/secretary";
+        } else if (isDoctor) {
+            return "/doctor";
+        }
+        else {
             throw new IllegalStateException();
         }
     }
