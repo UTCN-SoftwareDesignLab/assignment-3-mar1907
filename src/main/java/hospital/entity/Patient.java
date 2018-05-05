@@ -33,7 +33,6 @@ public class Patient {
 
     public Patient(PatientDTO patientDTO){
         this.name = patientDTO.name;
-        //TODO maybe this.id = patientDTO.id;
         this.idCard = patientDTO.idCard;
         this.cnp = patientDTO.cnp;
         this.dob = patientDTO.dob;

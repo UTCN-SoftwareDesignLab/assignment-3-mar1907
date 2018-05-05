@@ -1,0 +1,82 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Consultations</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+    Patients:
+    <table border="1">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Id Card Nr</th>
+            <th>CNP</th>
+            <th>Date of Birth</th>
+            <th>Address</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="patient : ${patients}">
+            <td th:text="${patient.id}"></td>
+            <td th:text="${patient.name}"></td>
+            <td th:text="${patient.idCard}"></td>
+            <td th:text="${patient.cnp}"></td>
+            <td th:text="${patient.dob}"></td>
+            <td th:text="${patient.address}"></td>
+        </tr>
+        </tbody>
+    </table>
+
+    Doctors:
+    <table border="1">
+        <thead>
+        <tr>
+            <th>Name</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="doctor : ${doctors}">
+            <td th:text="${doctor.username}"></td>
+        </tr>
+        </tbody>
+    </table>
+
+    Consultations:
+    <table border="1">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Title</th>
+            <th>Date</th>
+            <th>Patient</th>
+            <th>Doctor</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="consultation : ${consultations}">
+            <td th:text="${consultation.id}"></td>
+            <td th:text="${consultation.title}"></td>
+            <td th:text="${consultation.date}"></td>
+            <td th:text="${consultation.patient.name}"></td>
+            <td th:text="${consultation.user.username}"></td>
+        </tr>
+        </tbody>
+    </table>
+
+    <form action="#" th:action="@{/secretary/consultations}"  th:object="${consultation}" method="post">
+        <p>Id: <input type="text" name="id" id="id" value="0" /></p>
+        <p>Title: <input type="text" th:field="*{title}" /></p>
+        <p>Details: <input type="text" th:field="*{details}" /></p>
+        <p>Date: <input type="date" th:field="*{date}" /></p>
+        <p>Patient Id: <input type="text" name="pid" id="pid" value="0" /></p>
+        <p>Doctor name: <input type="text" name="dname" id="dname" value="0" /></p>
+        <p><input type="submit" name="Create" value="Create" /> </p>
+        <p><input type="submit" name="Update" value="Update" /> </p>
+        <p><input type="submit" name="Delete" value="Delete" /> </p>
+    </form>
+    <p th:text="${result}" />
+    <a href="/secretary">Back</a>
+</body>
+</html>

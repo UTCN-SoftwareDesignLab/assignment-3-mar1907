@@ -7,8 +7,10 @@ import hospital.entity.validation.Notification;
 import java.util.List;
 
 public interface UserService {
-    List<User> getAll();
+    List<UserDTO> getAll();
     Notification<Boolean> create(UserDTO userDTO, String role);
     Notification<Boolean> delete(String username);
     Notification<Boolean> update(UserDTO userDTO, String role);
+
+    List<User> getDoctors();
 }

@@ -12,7 +12,11 @@ import org.springframework.security.authentication.encoding.ShaPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+
+import static java.util.stream.Collectors.toList;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -29,8 +33,17 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<User> getAll() {
-        return userRepository.findAll();
+    public List<UserDTO> getAll() {
+        List<User> users = userRepository.findAll();
+        List<UserDTO> userDTOList = new ArrayList<>();
+        for(User user: users){
+            UserDTO userDTO = new UserDTO();
+            userDTO.username = user.getUsername();
+            userDTO.role = roleRepository.findRoleByUsername(userDTO.username).getRole();
+            userDTOList.add(userDTO);
+        }
+
+        return userDTOList;
     }
 
     @Override
@@ -86,5 +99,11 @@ public class UserServiceImpl implements UserService {
             notification.setResult(Boolean.TRUE);
             return notification;
         }
+    }
+
+    @Override
+    public List<User> getDoctors() {
+        List<UserDTO> users = getAll();
+        return users.stream().filter(u->u.role.equals("DOCTOR")).map(User::new).collect(toList());
     }
 }

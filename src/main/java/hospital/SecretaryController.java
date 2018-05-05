@@ -1,9 +1,12 @@
 package hospital;
 
+import hospital.dto.ConsultationDTO;
 import hospital.dto.PatientDTO;
 import hospital.dto.UserDTO;
 import hospital.entity.validation.Notification;
+import hospital.service.consultation.ConsultationService;
 import hospital.service.patient.PatientService;
+import hospital.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,6 +20,10 @@ public class SecretaryController {
 
     @Autowired
     private PatientService patientService;
+    @Autowired
+    private UserService userService;
+    @Autowired
+    private ConsultationService consultationService;
 
     @RequestMapping(value = "/secretary", method = RequestMethod.GET)
     public String index(Model model){
@@ -49,5 +56,14 @@ public class SecretaryController {
 
         model.addAttribute("patients",patientService.getAll());
         return "secretary";
+    }
+
+    @RequestMapping(value = "/secretary/consultations", method = RequestMethod.GET)
+    public String indexConsultations(Model model){
+        model.addAttribute("patients",patientService.getAll());
+        model.addAttribute("doctors",userService.getDoctors());
+        model.addAttribute("consultations",consultationService.getAll());
+        model.addAttribute("consultation",new ConsultationDTO());
+        return "consultations";
     }
 }
