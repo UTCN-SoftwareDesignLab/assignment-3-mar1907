@@ -11,5 +11,5 @@ public interface ConsultationService {
     List<Consultation> getAll();
     Notification<Boolean> save(ConsultationDTO consultationDTO, String doctor, Integer patientId);
     Notification<Boolean> update(Integer consultationId, ConsultationDTO consultationDTO, String doctor, Integer patientId);
-    Notification<Boolean> save(Integer consultationId);
+    Notification<Boolean> delete(Integer consultationId);
 }

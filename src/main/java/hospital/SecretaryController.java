@@ -66,4 +66,52 @@ public class SecretaryController {
         model.addAttribute("consultation",new ConsultationDTO());
         return "consultations";
     }
+
+    @RequestMapping(value = "/secretary/consultations", method = RequestMethod.POST, params = "Create=Create")
+    public String createConsultation(@ModelAttribute("consultation") ConsultationDTO consultationDTO,
+                                     @RequestParam int pid, @RequestParam String dname, Model model){
+        Notification<Boolean> notification = consultationService.save(consultationDTO,dname,pid);
+        if(notification.hasErrors()){
+            model.addAttribute("result",notification.getFormattedErrors());
+        } else {
+            model.addAttribute("result","Creation succesful!");
+        }
+
+        model.addAttribute("patients",patientService.getAll());
+        model.addAttribute("doctors",userService.getDoctors());
+        model.addAttribute("consultations",consultationService.getAll());
+        return "consultations";
+    }
+
+    @RequestMapping(value = "/secretary/consultations", method = RequestMethod.POST, params = "Update=Update")
+    public String updateConsultation(@ModelAttribute("consultation") ConsultationDTO consultationDTO,
+                                     @RequestParam int id, @RequestParam int pid, @RequestParam String dname, Model model){
+        Notification<Boolean> notification = consultationService.update(id,consultationDTO,dname,pid);
+        if(notification.hasErrors()){
+            model.addAttribute("result",notification.getFormattedErrors());
+        } else {
+            model.addAttribute("result","Update succesful!");
+        }
+
+        model.addAttribute("patients",patientService.getAll());
+        model.addAttribute("doctors",userService.getDoctors());
+        model.addAttribute("consultations",consultationService.getAll());
+        return "consultations";
+    }
+
+    @RequestMapping(value = "/secretary/consultations", method = RequestMethod.POST, params = "Delete=Delete")
+    public String deleteConsultation(@ModelAttribute("consultation") ConsultationDTO consultationDTO,
+                                     @RequestParam int id, Model model){
+        Notification<Boolean> notification = consultationService.delete(id);
+        if(notification.hasErrors()){
+            model.addAttribute("result",notification.getFormattedErrors());
+        } else {
+            model.addAttribute("result","Delete succesful!");
+        }
+
+        model.addAttribute("patients",patientService.getAll());
+        model.addAttribute("doctors",userService.getDoctors());
+        model.addAttribute("consultations",consultationService.getAll());
+        return "consultations";
+    }
 }

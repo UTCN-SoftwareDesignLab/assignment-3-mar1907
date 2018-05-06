@@ -77,7 +77,7 @@ public class ConsultationServiceImpl implements ConsultationService {
     }
 
     @Override
-    public Notification<Boolean> save(Integer consultationId) {
+    public Notification<Boolean> delete(Integer consultationId) {
         consultationRepository.delete(consultationId);
         Notification<Boolean> notification = new Notification<>();
         notification.setResult(Boolean.TRUE);

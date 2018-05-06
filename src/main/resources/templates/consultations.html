@@ -51,6 +51,7 @@
             <th>Title</th>
             <th>Date</th>
             <th>Patient</th>
+            <th>Patient Id</th>
             <th>Doctor</th>
         </tr>
         </thead>
@@ -60,6 +61,7 @@
             <td th:text="${consultation.title}"></td>
             <td th:text="${consultation.date}"></td>
             <td th:text="${consultation.patient.name}"></td>
+            <td th:text="${consultation.patient.id}"></td>
             <td th:text="${consultation.user.username}"></td>
         </tr>
         </tbody>
