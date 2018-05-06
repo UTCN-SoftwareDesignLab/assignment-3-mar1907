@@ -106,4 +106,9 @@ public class UserServiceImpl implements UserService {
         List<UserDTO> users = getAll();
         return users.stream().filter(u->u.role.equals("DOCTOR")).map(User::new).collect(toList());
     }
+
+    @Override
+    public User findByName(String name) {
+        return userRepository.findUserByUsername(name);
+    }
 }

@@ -13,4 +13,5 @@ public interface UserService {
     Notification<Boolean> update(UserDTO userDTO, String role);
 
     List<User> getDoctors();
+    User findByName(String name);
 }

@@ -3,8 +3,12 @@
 <head>
     <title>Consultations</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <script src="/webjars/jquery/jquery.min.js"></script>
+    <script src="/webjars/sockjs-client/sockjs.min.js"></script>
+    <script src="/webjars/stomp-websocket/stomp.min.js"></script>
+    <script src="/consultationApp.js"></script>
 </head>
-<body>
+<body onload="connect()" onunload="disconnect()">
     Patients:
     <table border="1">
         <thead>
@@ -71,10 +75,10 @@
         <p>Id: <input type="text" name="id" id="id" value="0" /></p>
         <p>Title: <input type="text" th:field="*{title}" /></p>
         <p>Details: <input type="text" th:field="*{details}" /></p>
-        <p>Date: <input type="date" th:field="*{date}" /></p>
+        <p>Date: <input type="date" id="date" th:field="*{date}" /></p>
         <p>Patient Id: <input type="text" name="pid" id="pid" value="0" /></p>
         <p>Doctor name: <input type="text" name="dname" id="dname" value="0" /></p>
-        <p><input type="submit" name="Create" value="Create" /> </p>
+        <p><input type="submit" id="createBtn" name="Create" value="Create" /> </p>
         <p><input type="submit" name="Update" value="Update" /> </p>
         <p><input type="submit" name="Delete" value="Delete" /> </p>
     </form>

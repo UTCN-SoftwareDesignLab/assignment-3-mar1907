@@ -3,8 +3,22 @@
 <head>
     <title>Doctor</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <script src="/webjars/jquery/jquery.min.js"></script>
+    <script src="/webjars/sockjs-client/sockjs.min.js"></script>
+    <script src="/webjars/stomp-websocket/stomp.min.js"></script>
+    <script src="/doctorApp.js"></script>
 </head>
-<body>
+<body onload="connect()" onunload="disconnect()">
+    <table id="conversation" class="table table-striped">
+        <thead>
+        <tr>
+            <th>New Appointments</th>
+        </tr>
+        </thead>
+        <tbody id="newMessages">
+        </tbody>
+    </table>
+
     Patients:
     <table border="1">
         <thead>

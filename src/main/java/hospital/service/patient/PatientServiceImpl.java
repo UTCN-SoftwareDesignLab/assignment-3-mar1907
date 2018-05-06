@@ -64,4 +64,9 @@ public class PatientServiceImpl implements PatientService {
             return notification;
         }
     }
+
+    @Override
+    public Patient findById(int id) {
+        return patientRepository.findPatientById(id);
+    }
 }

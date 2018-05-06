@@ -10,4 +10,6 @@ public interface PatientService {
     List<Patient> getAll();
     Notification<Boolean> save(PatientDTO patientDTO);
     Notification<Boolean> update(PatientDTO patientDTO, Integer id);
+
+    Patient findById(int id);
 }
