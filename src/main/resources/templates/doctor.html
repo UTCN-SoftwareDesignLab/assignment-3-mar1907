@@ -1,0 +1,73 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Doctor</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+    Patients:
+    <table border="1">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Id Card Nr</th>
+            <th>CNP</th>
+            <th>Date of Birth</th>
+            <th>Address</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="patient : ${patients}">
+            <td th:text="${patient.id}"></td>
+            <td th:text="${patient.name}"></td>
+            <td th:text="${patient.idCard}"></td>
+            <td th:text="${patient.cnp}"></td>
+            <td th:text="${patient.dob}"></td>
+            <td th:text="${patient.address}"></td>
+        </tr>
+        </tbody>
+    </table>
+
+    <form action="#" th:action="@{/doctor}" method="post">
+        <p>Id: <input type="text" name="id" id="id" value="0" /></p>
+        <p><input type="submit" name="Consultations" value="Consultations" /> </p>
+    </form>
+
+    Consultations:
+    <table border="1">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Title</th>
+            <th>Date</th>
+            <th>Patient</th>
+            <th>Patient Id</th>
+            <th>Doctor</th>
+            <th>Details</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="consultation : ${consultations}">
+            <td th:text="${consultation.id}"></td>
+            <td th:text="${consultation.title}"></td>
+            <td th:text="${consultation.date}"></td>
+            <td th:text="${consultation.patient.name}"></td>
+            <td th:text="${consultation.patient.id}"></td>
+            <td th:text="${consultation.user.username}"></td>
+            <td th:text="${consultation.details}"></td>
+        </tr>
+        </tbody>
+    </table>
+
+    <form action="#" th:action="@{/doctor}" method="post">
+        <p>Id: <input type="text" name="cid" id="cid" value="0" /></p>
+        <p>Details: <input type="text" name="details" id="details" /></p>
+        <p><input type="submit" name="Update" value="Update" /> </p>
+    </form>
+
+    <br/>
+    <a href="/logout">Logout</a>
+
+</body>
+</html>

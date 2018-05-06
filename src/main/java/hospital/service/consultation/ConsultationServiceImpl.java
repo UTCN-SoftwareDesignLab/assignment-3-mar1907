@@ -83,4 +83,25 @@ public class ConsultationServiceImpl implements ConsultationService {
         notification.setResult(Boolean.TRUE);
         return notification;
     }
+
+    @Override
+    public List<Consultation> getByPatient(int patientId) {
+        return consultationRepository.getConsultationByPatientId(patientId);
+    }
+
+    @Override
+    public Notification<Boolean> updateDetails(int id, String details) {
+        Notification<Boolean> notification = new Notification<>();
+        Consultation consultation = consultationRepository.findOne(id);
+        if(consultation==null){
+            notification.addError("No such consultation!");
+            notification.setResult(Boolean.FALSE);
+            return notification;
+        }
+
+        consultation.setDetails(details);
+        consultationRepository.save(consultation);
+        notification.setResult(Boolean.TRUE);
+        return notification;
+    }
 }

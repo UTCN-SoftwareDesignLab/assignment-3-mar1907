@@ -12,4 +12,7 @@ public interface ConsultationService {
     Notification<Boolean> save(ConsultationDTO consultationDTO, String doctor, Integer patientId);
     Notification<Boolean> update(Integer consultationId, ConsultationDTO consultationDTO, String doctor, Integer patientId);
     Notification<Boolean> delete(Integer consultationId);
+
+    List<Consultation> getByPatient(int patientId);
+    Notification<Boolean> updateDetails(int id, String details);
 }
