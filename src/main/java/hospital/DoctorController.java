@@ -1,6 +1,5 @@
 package hospital;
 
-import hospital.dto.PatientDTO;
 import hospital.entity.validation.Notification;
 import hospital.service.consultation.ConsultationService;
 import hospital.service.patient.PatientService;

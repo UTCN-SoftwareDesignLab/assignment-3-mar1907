@@ -2,7 +2,6 @@ package hospital.service.patient;
 
 import hospital.dto.PatientDTO;
 import hospital.entity.Patient;
-import hospital.entity.Role;
 import hospital.entity.validation.Notification;
 import hospital.entity.validation.PatientValidator;
 import hospital.repository.patient.PatientRepository;
